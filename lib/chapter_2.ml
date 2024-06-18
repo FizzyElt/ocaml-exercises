@@ -18,7 +18,7 @@ let equality1 = 42 = 42
 let equality2 = "hi" = "hi"
 
 (* physical equality *)
-let equality2 = "hi" == "hi"
+let equality3 = "hi" == "hi"
 
 (* assert *)
 let assert1 = assert true
@@ -68,7 +68,7 @@ let g x y = if y then x else x
 let h x y z = if x then y else z
 
 (* bool -> 'a -> 'b -> 'a *)
-let i x y z = if x then y else y
+let i x y _z = if x then y else y
 
 (* divide *)
 let divide numerator denominator = numerator /. denominator
