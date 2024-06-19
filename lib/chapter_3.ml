@@ -95,3 +95,42 @@ let earliest date_list =
   List.fold_left
     (fun acc e -> acc |> Option.map (fun x -> if is_before e x then e else x))
     None date_list
+
+type suit = Heart | Diamond | Club | Spade
+
+type rank =
+  | Two
+  | Three
+  | Four
+  | Five
+  | Six
+  | Seven
+  | Eight
+  | Nine
+  | Ten
+  | Jack
+  | Queen
+  | King
+  | Ace
+
+type card = { suit : suit; rank : rank }
+
+let club_ace = { suit = Club; rank = Ace }
+let heart_queen = { suit = Heart; rank = Queen }
+let diamond_two = { suit = Diamond; rank = Two }
+let spade_seven = { suit = Spade; rank = Seven }
+
+(* quadrant *)
+type quad = I | II | III | IV
+type sign = Neg | Zero | Pos
+
+let sign (x : int) : sign = if x = 0 then Zero else if x < 0 then Neg else Pos
+
+let quadrant : int * int -> quad option =
+ fun (x, y) ->
+  match (sign x, sign y) with
+  | Pos, Pos -> Some I
+  | Neg, Pos -> Some II
+  | Neg, Neg -> Some III
+  | Pos, Neg -> Some IV
+  | _ -> None
