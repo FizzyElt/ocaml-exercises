@@ -134,3 +134,27 @@ let quadrant : int * int -> quad option =
   | Neg, Neg -> Some III
   | Pos, Neg -> Some IV
   | _ -> None
+
+type 'a tree = Leaf of 'a | Node of 'a tree * 'a tree
+
+let depth root =
+  let rec help root depth =
+    match root with
+    | Leaf _ -> depth
+    | Node (l, r) -> max (help l (depth + 1)) (help r (depth + 1))
+  in
+  help root 0
+
+let rec shape tree_l tree_r =
+  match (tree_l, tree_r) with
+  | Leaf _, Leaf _ -> true
+  | Node (t1l, t1r), Node (t2l, t2r) -> shape t1l t2l && shape t1r t2r
+  | _ -> false
+
+let list_max list =
+  if List.length list = 0 then failwith "list_max"
+  else List.fold_left max Int.min_int list
+
+let list_max_string list =
+  if List.length list = 0 then "empty"
+  else list |> List.fold_left Int.max Int.min_int |> string_of_int
